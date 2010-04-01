@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<componentPackage>
+	
+	<!-- Component -->
+
+	<component id="Label" class="com.codecatalyst.linkify.component.halo.Label" />
+	<component id="Text" class="com.codecatalyst.linkify.component.halo.Text" />
+
+</componentPackage>

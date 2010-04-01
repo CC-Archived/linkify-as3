@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" version="3">
+  <includeClasses>
+    <classEntry path="com.codecatalyst.linkify.LinkTypes"/>
+    <classEntry path="com.codecatalyst.linkify.Linkify"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.ILinkPatternExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.core.ILinkPatternMatch"/>
+    <classEntry path="com.codecatalyst.linkify.transform.ILinkPatternTransform"/>
+    <classEntry path="com.codecatalyst.linkify.processor.ILinkTypeProcessor"/>
+    <classEntry path="com.codecatalyst.linkify.core.LinkPatternMatch"/>
+    <classEntry path="com.codecatalyst.linkify.transform.LinkPatternTransform"/>
+    <classEntry path="com.codecatalyst.linkify.processor.LinkTypeProcessor"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.AlreadyLinkedExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.DifferentSchemeExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.InsideTagExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.PreceededByNonWhitespaceExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.RequireSchemeExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.exclusion.StartsWithAtSignExclusion"/>
+    <classEntry path="com.codecatalyst.linkify.formatter.CapturedGroupFormatter"/>
+    <classEntry path="com.codecatalyst.linkify.formatter.CharacterFilterFormatter"/>
+    <classEntry path="com.codecatalyst.linkify.formatter.ILinkFormatter"/>
+    <classEntry path="com.codecatalyst.linkify.pattern.MATCH_EMAIL_ADDRESS"/>
+    <classEntry path="com.codecatalyst.linkify.pattern.MATCH_PHONE_NUMBER"/>
+    <classEntry path="com.codecatalyst.linkify.pattern.MATCH_TWITTER_MENTION"/>
+    <classEntry path="com.codecatalyst.linkify.pattern.MATCH_URL"/>
+    <classEntry path="com.codecatalyst.linkify.component.halo.Label"/>
+    <classEntry path="com.codecatalyst.linkify.component.halo.Text"/>
+    <classEntry path="com.codecatalyst.linkify.component.halo.UITextField"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests>
+    <namespaceManifestEntry manifest="linkify-manifest.xml" namespace="http://codecatalyst.com/linkify/2010"/>
+  </namespaceManifests>
+</flexLibProperties>
