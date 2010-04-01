@@ -1,8 +1,10 @@
 # Linkify for ActionScript 3.0
 
-Linkify is an ActionScript 3.0 library that simplifies the task of converting URLs and e-mail addresses in plain text into clickable links.  
+Linkify is an ActionScript 3.0 library that simplifies the task of identifying patterns in plain text (URLs, e-mail addresses, phone numbers, twitter mentions, etc.) and converting them into clickable links.
 
-The included ActionScript 3.0 functions are suitable for use in Flash, pure ActionScript or Flex projects.  Linkify also includes custom UI components which extend standard Flex components to provide missing hyperlink styling capabilities analogous to those found in HTML, including custom colors and text-decoration for links in normal, hover and active states.
+The included ActionScript 3.0 functions are suitable for use in Flash, pure ActionScript or Flex projects.  
+
+Linkify also includes custom UI components which extend standard Flex 3 'halo' components to provide missing hyperlink styling capabilities analogous to those found in HTML, including custom colors and text-decoration for links in normal, hover and active states.
 
 ## Regular Expressions
 
