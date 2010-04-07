@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:linkify="http://codecatalyst.com/linkify/2010"
+	layout="vertical" 
+	horizontalAlign="center" verticalAlign="middle" 
+	paddingLeft="22" paddingRight="22" paddingTop="22" paddingBottom="22">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.codecatalyst.linkify.Linkify;
+			import com.codecatalyst.linkify.LinkTypes;
+			
+			protected function linkify( text:String ):String
+			{
+				return Linkify.addLinks( text, [ LinkTypes.URL, LinkTypes.EMAIL_ADDRESS, LinkTypes.PHONE_NUMBER, LinkTypes.TWITTER_MENTION ] );
+			}
+
+		]]>
+	</mx:Script>
+	
+	<mx:Panel 
+		title="Linkify Example"
+		width="100%" height="100%">
+
+		<mx:VDividedBox
+			width="100%" height="100%">
+			
+			<!-- Input UI -->
+			
+			<mx:Box
+				width="100%" height="50%"
+				paddingLeft="8" paddingRight="8" paddingTop="8" paddingBottom="8">
+				
+				<mx:Label 
+					text="Input" 
+					fontWeight="bold" />
+				
+				<mx:TextArea 
+					id="linkInput" 
+					width="100%" height="100%" />
+
+			</mx:Box>
+		
+			<!-- Output UI -->
+			
+			<mx:Box
+				width="100%" height="50%"
+				paddingLeft="8" paddingRight="8" paddingTop="8" paddingBottom="8">
+				
+				<mx:Label 
+					text="Output" 
+					fontWeight="bold" />
+				
+				<mx:TabNavigator
+					width="100%" height="100%">
+					
+					<mx:Box
+						label="Preview"
+						width="100%" height="100%">
+						
+						<linkify:Text
+							id="linkifiedText"
+							width="100%" height="100%"
+							htmlText="{ linkify( linkInput.text ) }" 
+							linkColor="{ linkColorPicker.selectedColor }"
+							linkDecoration="{ linkDecorationComboBox.selectedItem }"
+							hoverLinkColor="{ hoverLinkColorPicker.selectedColor }"
+							hoverLinkDecoration="{ hoverLinkDecorationComboBox.selectedItem }"
+							activeLinkColor="{ activeLinkColorPicker.selectedColor }"
+							activeLinkDecoration="{ activeLinkDecorationComboBox.selectedItem }"
+							link="navigateToURL( new URLRequest( event.text ), '_blank' )" />
+
+					</mx:Box>
+
+					<mx:Box
+						label="Raw HTML"
+						width="100%" height="100%">
+						
+						<mx:Text
+							width="100%" height="100%"
+							text="{ linkify( linkInput.text ) }" />
+						
+					</mx:Box>
+	
+				</mx:TabNavigator>
+				
+			</mx:Box>
+
+		</mx:VDividedBox>
+		
+		<mx:ControlBar 
+			height="104"
+			horizontalAlign="center">
+			
+			<!-- Link Styles -->
+			
+			<mx:Form>
+				<mx:FormItem label="Link Color:">
+					<mx:ColorPicker 
+						id="linkColorPicker" 
+						selectedColor="#0000FF" />
+				</mx:FormItem>
+				<mx:FormItem label="Link decoration:">
+					<mx:ComboBox
+						id="linkDecorationComboBox"
+						selectedIndex="0">
+						<mx:dataProvider>
+							<mx:Array>
+								<mx:String>none</mx:String>
+								<mx:String>underline</mx:String>
+							</mx:Array>
+						</mx:dataProvider>
+					</mx:ComboBox>
+				</mx:FormItem>
+			</mx:Form>
+
+			<!-- Hover Link Styles -->
+			
+			<mx:Form>
+				<mx:FormItem label="Hover Link Color:">
+					<mx:ColorPicker 
+						id="hoverLinkColorPicker" 
+						selectedColor="#000099" />
+				</mx:FormItem>
+				<mx:FormItem label="Hover Link decoration:">
+					<mx:ComboBox
+						id="hoverLinkDecorationComboBox"
+						selectedIndex="1">
+						<mx:dataProvider>
+							<mx:Array>
+								<mx:String>none</mx:String>
+								<mx:String>underline</mx:String>
+							</mx:Array>
+						</mx:dataProvider>
+					</mx:ComboBox>
+				</mx:FormItem>
+			</mx:Form>
+
+			<!-- Active Link Styles -->
+
+			<mx:Form>
+				<mx:FormItem label="Active Link Color:">
+					<mx:ColorPicker 
+						id="activeLinkColorPicker" 
+						selectedColor="#990000" />
+				</mx:FormItem>
+				<mx:FormItem label="Active Link decoration:">
+					<mx:ComboBox
+						id="activeLinkDecorationComboBox"
+						selectedIndex="1">
+						<mx:dataProvider>
+							<mx:Array>
+								<mx:String>none</mx:String>
+								<mx:String>underline</mx:String>
+							</mx:Array>
+						</mx:dataProvider>
+					</mx:ComboBox>
+				</mx:FormItem>
+			</mx:Form>			
+			
+		</mx:ControlBar>
+		
+	</mx:Panel>
+	
+</mx:Application>
