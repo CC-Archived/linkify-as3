@@ -23,37 +23,35 @@
 package com.codecatalyst.linkify.processor
 {
 	import flash.errors.IllegalOperationError;
-	import com.codecatalyst.linkify.exclusion.ILinkPatternExclusion;
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
-	import com.codecatalyst.linkify.transform.ILinkPatternTransform;
-	import com.codecatalyst.linkify.core.LinkPatternMatch;
+	import com.codecatalyst.linkify.processor.exclusion.IPatternMatchExclusion;
+	import com.codecatalyst.linkify.processor.transform.IPatternMatchLinkTransform;
 
 	/**
-	 * LinkTypeProcessor
+	 * RegExpTextLinkProcessor
 	 * 
 	 * @author John Yanarella
 	 */
-	public class LinkTypeProcessor implements ILinkTypeProcessor
+	public class RegExpTextLinkProcessor implements ITextLinkProcessor
 	{
 		// ========================================
 		// Protected properties
 		// ========================================
 		
 		/**
-		 * The RegEx pattern associated with this ILinkType.
+		 * The RegEx pattern associated with this ITextLinkProcessor.
 		 */
 		protected var pattern:RegExp;
 		
-		[ArrayElementType("com.codecatalyst.linkify.exclusion.ILinkPatternExclusion")]
+		[ArrayElementType("com.codecatalyst.linkify.processor.exclusion.IPatternMatchExclusion")]
 		/**
-		 * The set of ILinkPatternExclusions associated with this ILinkType.
+		 * The set of IPatternMatchExclusion associated with this ITextLinkProcessor.
 		 */
 		protected var exclusions:Array;
 		
 		/**
-		 * The ILinkPatternTransform responsible for transforming a ILinkPatternMatch into a link for this ILinkType.
+		 * The IPatternMatchLinkTransform responsible for transforming a IPatternMatch into a link for this ITextLinkProcessor.
 		 */ 
-		protected var transform:ILinkPatternTransform;
+		protected var transform:IPatternMatchLinkTransform;
 		
 		// ========================================
 		// Constructor
@@ -62,11 +60,11 @@ package com.codecatalyst.linkify.processor
 		/**
 		 * Constructor.
 		 * 
-		 * @param pattern The RegEx pattern associated with this ILinkType.
-		 * @param exclusions The set of ILinkPatternExclusions associated with this ILinkType.
-		 * @param transform The ILinkPatternTransform responsible for transforming a ILinkPatternMatch into a link for this ILinkType.
+		 * @param pattern The RegEx pattern associated with this ITextLinkProcessor.
+		 * @param exclusions The set of ILinkPatternExclusions associated with this ITextLinkProcessor.
+		 * @param transform The IPatternMatchLinkTransform responsible for transforming a IPatternMatch into a link for this ITextLinkProcessor.
 		 */
-		public function LinkTypeProcessor( pattern:RegExp, exclusions:Array, transform:ILinkPatternTransform )
+		public function RegExpTextLinkProcessor( pattern:RegExp, exclusions:Array, transform:IPatternMatchLinkTransform )
 		{
 			super();
 			
@@ -95,9 +93,9 @@ package com.codecatalyst.linkify.processor
 					
 					var capturedGroups:Array = ( rest.length - 2 > 0 ) ? rest.slice( 0, ( rest.length - 2 ) ) : new Array();
 					
-					var match:ILinkPatternMatch = new LinkPatternMatch( matchedText, text, startIndex, endIndex, capturedGroups );
+					var match:IPatternMatch = new PatternMatch( matchedText, text, startIndex, endIndex, capturedGroups );
 					
-					for each ( var exclusion:ILinkPatternExclusion in exclusions )
+					for each ( var exclusion:IPatternMatchExclusion in exclusions )
 					{
 						if ( exclusion.excludeMatch( match ) )
 							return matchedText;

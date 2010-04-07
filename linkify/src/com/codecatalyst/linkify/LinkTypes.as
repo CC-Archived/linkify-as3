@@ -22,11 +22,11 @@
 
 package com.codecatalyst.linkify
 {
-	import com.codecatalyst.linkify.exclusion.*;
-	import com.codecatalyst.linkify.formatter.*;
-	import com.codecatalyst.linkify.pattern.*;
 	import com.codecatalyst.linkify.processor.*;
-	import com.codecatalyst.linkify.transform.*;
+	import com.codecatalyst.linkify.processor.exclusion.*;
+	import com.codecatalyst.linkify.processor.pattern.*;
+	import com.codecatalyst.linkify.processor.transform.*;
+	import com.codecatalyst.linkify.processor.transform.formatter.*;
 
 	/**
 	 * LinkTypes
@@ -42,31 +42,31 @@ package com.codecatalyst.linkify
 		/**
 		 * URL.
 		 */
-		public static var URL:ILinkTypeProcessor = 
-			new LinkTypeProcessor( 
-				MATCH_URL, 
-				[ new StartsWithAtSignExclusion(), new InsideTagExclusion(), new AlreadyLinkedExclusion() ], 
-				new LinkPatternTransform( "http://" ) 
+		public static var URL:ITextLinkProcessor = 
+			new RegExpTextLinkProcessor( 
+				URL_PATTERN, 
+				[ new StartsWithAtSignExclusion(), new PartOfTagExclusion(), new AlreadyLinkedExclusion() ], 
+				new PatternMatchLinkTransform( "http://" ) 
 			);
 		
 		/**
 		 * E-mail address.
 		 */
-		public static var EMAIL_ADDRESS:ILinkTypeProcessor = 
-			new LinkTypeProcessor( 
-				MATCH_EMAIL_ADDRESS, 
-				[ new InsideTagExclusion(), new AlreadyLinkedExclusion() ], 
-				new LinkPatternTransform( "mailto:" ) 
+		public static var EMAIL_ADDRESS:ITextLinkProcessor = 
+			new RegExpTextLinkProcessor( 
+				EMAIL_ADDRESS_PATTERN, 
+				[ new PartOfTagExclusion(), new AlreadyLinkedExclusion() ], 
+				new PatternMatchLinkTransform( "mailto:" ) 
 			);
 		
 		/**
 		 * Phone number.
 		 */
-		public static var PHONE_NUMBER:ILinkTypeProcessor = 
-			new LinkTypeProcessor(
-				MATCH_PHONE_NUMBER,
-				[ new InsideTagExclusion(), new AlreadyLinkedExclusion() ],
-				new LinkPatternTransform( 
+		public static var PHONE_NUMBER:ITextLinkProcessor = 
+			new RegExpTextLinkProcessor(
+				PHONE_NUMBER_PATTERN,
+				[ new PartOfTagExclusion(), new AlreadyLinkedExclusion() ],
+				new PatternMatchLinkTransform( 
 					"callto:", 
 					new CharacterFilterFormatter( "+0-9" ), 
 					new CapturedGroupFormatter( "{0} {1} {2}-{3}" )
@@ -76,11 +76,11 @@ package com.codecatalyst.linkify
 		/**
 		 * Twitter mention.
 		 */
-		public static var TWITTER_MENTION:ILinkTypeProcessor =
-			new LinkTypeProcessor(
-				MATCH_TWITTER_MENTION,
-				[ new PreceededByNonWhitespaceExclusion(), new InsideTagExclusion(), new AlreadyLinkedExclusion() ],
-				new LinkPatternTransform(
+		public static var TWITTER_MENTION:ITextLinkProcessor =
+			new RegExpTextLinkProcessor(
+				TWITTER_MENTION_PATTERN,
+				[ new PreceededByNonWhitespaceExclusion(), new PartOfTagExclusion(), new AlreadyLinkedExclusion() ],
+				new PatternMatchLinkTransform(
 					null,
 					new CapturedGroupFormatter( "http://twitter.com/{0}" )
 				)

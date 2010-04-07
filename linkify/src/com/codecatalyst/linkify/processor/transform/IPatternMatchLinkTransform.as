@@ -20,49 +20,25 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.core
+package com.codecatalyst.linkify.processor.transform
 {
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+
 	/**
-	 * ILinkPatternMatch
+	 * IPatternMatchLinkTransform
 	 * 
 	 * @author John Yanarella
 	 */
-	public interface ILinkPatternMatch
+	public interface IPatternMatchLinkTransform
 	{
 		/**
-		 * The matched substring.
+		 * Create a link given the specified IPatternMatch.
+		 * 
+		 * @param match The IPatternMatch containing the text that should be converted into a link.
+		 * @param prefix The extra prefix to prepend to the URL within the href attribute.  Typically 'event:' for use with TextField or Flex Text components.
+		 * 
+		 * @return The linkified text.
 		 */
-		function get matchedText():String;
-
-		/**
-		 * The original text.
-		 */
-		function get originalText():String;
-		
-		/**
-		 * The starting index of the matched substring relative to the original string.
-		 */
-		function get startIndex():int;
-		
-		/**
-		 * The ending index of the matched substring relative to the original string.
-		 */
-		function get endIndex():int;
-
-		[ArrayElementType("String")]
-		/**
-		 * Any captured parenthetical group matches.
-		 */
-		function get capturedGroups():Array;
-		
-		/**
-		 * The portion of the string that precedes the matched substring.
-		 */
-		function get leftText():String;
-		
-		/**
-		 * The portion of the string that follows the matched substring.
-		 */
-		function get rightText():String;
+		function createLink( match:IPatternMatch, prefix:String = "event:" ):String;
 	}
 }

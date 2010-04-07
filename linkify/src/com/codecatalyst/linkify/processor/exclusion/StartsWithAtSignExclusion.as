@@ -20,64 +20,41 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.formatter
+package com.codecatalyst.linkify.processor.exclusion
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
+	import com.codecatalyst.linkify.processor.IPatternMatch;
 	
-	import flash.errors.IllegalOperationError;
-
 	/**
-	 * CapturedGroupFormatter
+	 * StartsWithAtSignExclusion
 	 * 
 	 * @author John Yanarella
 	 */
-	public class CapturedGroupFormatter implements ILinkFormatter
+	public class StartsWithAtSignExclusion implements IPatternMatchExclusion
 	{
 		// ========================================
-		// Protected properties
-		// ========================================
-
-		/**
-		 * Format string containing substitution parameters (ex. {0}) based on ILinkPatternMatch captured groups.
-		 */
-		protected var formatString:String;
-		
-		// ========================================
 		// Constructor
-		// ========================================
+		// ========================================		
 		
 		/**
 		 * Constructor.
-		 * 
-		 * @param formatString Format string containing substitution parameters (ex. {0}) based on ILinkPatternMatch captured groups.
 		 */
-		public function CapturedGroupFormatter( formatString:String )
+		public function StartsWithAtSignExclusion()
 		{
 			super();
-			
-			this.formatString = formatString;
 		}
 		
 		// ========================================
 		// Public methods
-		// ========================================
+		// ========================================		
 		
 		/**
 		 * @inheritDoc
 		 */
-		public function format( match:ILinkPatternMatch ):String
+		public function excludeMatch( match:IPatternMatch ):Boolean
 		{
-			return formatString.replace( /\{(\d+)\}/g, 
-				function ( ...rest ):String
-				{
-					var parameterIndex:int = parseInt( rest[ 1 ] );
-					
-					if ( parameterIndex < match.capturedGroups.length )
-						return match.capturedGroups[ parameterIndex ] as String;
-					
-					throw new IllegalOperationError( "The specified parameter does not exist in the captured groups for this pattern match." );
-				}
-			);
+			// Detect the presence of an '@' character at the beginning of the matched text.
+			
+			return ( match.matchedText.match( /^@/i ) != null );
 		}
 	}
 }

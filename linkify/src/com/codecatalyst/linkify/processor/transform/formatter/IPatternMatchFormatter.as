@@ -20,41 +20,24 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.exclusion
+/**
+ * IPatternMatchFormatter
+ * 
+ * @author John Yanarella
+ */
+package com.codecatalyst.linkify.processor.transform.formatter
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
-	
-	/**
-	 * PreceededByNonWhitespaceExclusion
-	 * 
-	 * @author John Yanarella
-	 */
-	public class PreceededByNonWhitespaceExclusion implements ILinkPatternExclusion
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+
+	public interface IPatternMatchFormatter
 	{
-		// ========================================
-		// Constructor
-		// ========================================
-		
 		/**
-		 * Constructor.
+		 * Formats the specified IPatternMatch as a String.
+		 * 
+		 * @param text The IPatternMatch to format.
+		 * 
+		 * @return Formatted text.
 		 */
-		public function PreceededByNonWhitespaceExclusion()
-		{
-			super();
-		}
-		
-		// ========================================
-		// Public methods
-		// ========================================
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function excludeMatch( match:ILinkPatternMatch ):Boolean
-		{
-			// Detect the presence of a non-whitespace character preceeding the matched text.
-			
-			return ( match.leftText.match( /\S$/i ) != null );
-		}
+		function format( match:IPatternMatch ):String;
 	}
 }

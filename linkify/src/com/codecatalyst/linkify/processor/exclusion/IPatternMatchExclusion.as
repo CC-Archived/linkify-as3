@@ -20,24 +20,25 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-/**
- * ILinkFormatter
- * 
- * @author John Yanarella
- */
-package com.codecatalyst.linkify.formatter
+package com.codecatalyst.linkify.processor.exclusion
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
+	import com.codecatalyst.linkify.processor.IPatternMatch;
 
-	public interface ILinkFormatter
+	/**
+	 * IPatternMatchExclusion
+	 * 
+	 * @author John Yanarella
+	 */
+	public interface IPatternMatchExclusion
 	{
 		/**
-		 * Formats the specified string.
+		 * Evaluates whether the specified IPatternMatch should excluded from being transformed into a clickable link.
 		 * 
-		 * @param text The text to format.
+		 * @param match The IPatternMatch to evaluate.
+		 * @return A Boolean value indicating whether this IPatternMatch should be excluded from transformation.
 		 * 
-		 * @return Formatted text.
+		 * @see LinkType
 		 */
-		function format( match:ILinkPatternMatch ):String;
+		function excludeMatch( match:IPatternMatch ):Boolean;
 	}
 }

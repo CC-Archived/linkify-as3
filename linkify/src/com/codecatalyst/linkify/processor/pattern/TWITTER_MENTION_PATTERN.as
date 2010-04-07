@@ -20,25 +20,10 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.processor
+package com.codecatalyst.linkify.processor.pattern
 {
 	/**
-	 * ILinkTypeProcessor
-	 * 
-	 * @author John Yanarella
+	 * Twitter username regular expression pattern.
 	 */
-	public interface ILinkTypeProcessor
-	{
-		/**
-		 * Processes the specified plain text and converts all occurrences of a given link type into clickable links.
-		 * 
-		 * @param text The text to linkify.
-		 * @param prefix The extra prefix to prepend to the URL within the href attribute.  Typically 'event:' for use with TextField or Flex Text components.
-		 * 
-		 * @return The linkified text.
-		 * 
-		 * @see Linkify
- 		 */
-		function process( text:String, prefix:String = "event:" ):String;
-	}
+	public const TWITTER_MENTION_PATTERN:RegExp = /@([a-z0-9_]+)/gi;
 }

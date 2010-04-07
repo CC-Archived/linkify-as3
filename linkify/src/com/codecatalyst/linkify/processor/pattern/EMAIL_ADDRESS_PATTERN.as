@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2010 CodeCatalyst, LLC - http://www.codecatalyst.com/
+// Copyright (c) 2004-2009 David Heinemeier Hansson
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,42 +19,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
-
-package com.codecatalyst.linkify.exclusion
+		
+package com.codecatalyst.linkify.processor.pattern
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
-	
 	/**
-	 * StartsWithAtSignExclusion
+	 * E-mail address matching regular expression pattern borrowed from RoR's TextHelper implementation.
 	 * 
-	 * @author John Yanarella
+	 * @see http://github.com/rails/rails/blob/master/actionpack/lib/action_view/helpers/text_helper.rb
 	 */
-	public class StartsWithAtSignExclusion implements ILinkPatternExclusion
-	{
-		// ========================================
-		// Constructor
-		// ========================================		
-		
-		/**
-		 * Constructor.
-		 */
-		public function StartsWithAtSignExclusion()
-		{
-			super();
-		}
-		
-		// ========================================
-		// Public methods
-		// ========================================		
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function excludeMatch( match:ILinkPatternMatch ):Boolean
-		{
-			// Detect the presence of an '@' character at the beginning of the matched text.
-			
-			return ( match.matchedText.match( /^@/i ) != null );
-		}
-	}
+	public const EMAIL_ADDRESS_PATTERN:RegExp = /([\w\.!#\$%\-+.]+@[a-z0-9\-]+(\.[a-z0-9\-]+)+)/gi;
 }

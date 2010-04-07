@@ -20,14 +20,14 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.core
+package com.codecatalyst.linkify.processor
 {
 	/**
-	 * LinkPatternMatch
+	 * RegExpPatternMatch
 	 * 
 	 * @author John Yanarella
 	 */
-	public class LinkPatternMatch implements ILinkPatternMatch
+	public class PatternMatch implements IPatternMatch
 	{
 		// ========================================
 		// Protected properties
@@ -142,7 +142,7 @@ package com.codecatalyst.linkify.core
 		 * @param endIndex The ending index of the matched substring relative to the original string.
 		 * @param capturedGroups Any captured parenthetical group matches.
 		 */
-		public function LinkPatternMatch( matchedText:String, originalText:String, startIndex:int, endIndex:int, capturedGroups:Array )
+		public function PatternMatch( matchedText:String, originalText:String, startIndex:int, endIndex:int, capturedGroups:Array )
 		{
 			super();
 			

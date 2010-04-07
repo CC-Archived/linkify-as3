@@ -20,16 +20,16 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.exclusion
+package com.codecatalyst.linkify.processor.exclusion
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
+	import com.codecatalyst.linkify.processor.IPatternMatch;
 	
 	/**
 	 * AlreadyLinkedExclusion
 	 * 
 	 * @author John Yanarella
 	 */
-	public class AlreadyLinkedExclusion implements ILinkPatternExclusion
+	public class AlreadyLinkedExclusion implements IPatternMatchExclusion
 	{
 		// ========================================
 		// Constructor
@@ -50,7 +50,7 @@ package com.codecatalyst.linkify.exclusion
 		/**
 		 * @inheritDoc
 		 */
-		public function excludeMatch( match:ILinkPatternMatch ):Boolean
+		public function excludeMatch( match:IPatternMatch ):Boolean
 		{
 			// Detect already linked URLs.
 			

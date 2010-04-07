@@ -20,10 +20,41 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.pattern
+package com.codecatalyst.linkify.processor.exclusion
 {
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+	
 	/**
-	 * Phone number matching regex pattern.
+	 * PreceededByNonWhitespaceExclusion
+	 * 
+	 * @author John Yanarella
 	 */
-	public const MATCH_PHONE_NUMBER:RegExp = /(\+1)*\s?(\d{3}|\(\d{3}\))[\s-]?(\d{3})-(\d{4})/gi;
+	public class PreceededByNonWhitespaceExclusion implements IPatternMatchExclusion
+	{
+		// ========================================
+		// Constructor
+		// ========================================
+		
+		/**
+		 * Constructor.
+		 */
+		public function PreceededByNonWhitespaceExclusion()
+		{
+			super();
+		}
+		
+		// ========================================
+		// Public methods
+		// ========================================
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function excludeMatch( match:IPatternMatch ):Boolean
+		{
+			// Detect the presence of a non-whitespace character preceeding the matched text.
+			
+			return ( match.leftText.match( /\S$/i ) != null );
+		}
+	}
 }

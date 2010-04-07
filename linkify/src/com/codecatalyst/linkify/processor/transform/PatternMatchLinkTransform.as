@@ -20,17 +20,17 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.transform
+package com.codecatalyst.linkify.processor.transform
 {
-	import com.codecatalyst.linkify.formatter.ILinkFormatter;
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+	import com.codecatalyst.linkify.processor.transform.formatter.IPatternMatchFormatter;
 
 	/**
-	 * LinkPatternTransform
+	 * PatternMatchLinkTransform
 	 * 
 	 * @author John Yanarella
 	 */
-	public class LinkPatternTransform implements ILinkPatternTransform
+	public class PatternMatchLinkTransform implements IPatternMatchLinkTransform
 	{
 		// ========================================
 		// Protected properties
@@ -42,14 +42,14 @@ package com.codecatalyst.linkify.transform
 		protected var scheme:String;
 		
 		/**
-		 * ILinkFormatter to apply to the matched text when creating the text to display for a link.
+		 * IPatternMatchFormatter to apply to the matched text when creating the text to display for a link.
 		 */
-		protected var hyperlinkReferenceFormatter:ILinkFormatter;
+		protected var hyperlinkReferenceFormatter:IPatternMatchFormatter;
 		
 		/**
-		 * ILinkFormatter to apply to the matched text when creating the hyperlink reference (aka 'href') for a link.
+		 * IPatternMatchFormatter to apply to the matched text when creating the hyperlink reference (aka 'href') for a link.
 		 */
-		protected var hyperlinkTextFormatter:ILinkFormatter;
+		protected var hyperlinkTextFormatter:IPatternMatchFormatter;
 		
 		// ========================================
 		// Constructor
@@ -59,10 +59,10 @@ package com.codecatalyst.linkify.transform
 		 * Constructor.
 		 * 
 		 * @param scheme URI Scheme
-		 * @param hyperlinkReferenceFormatter ILinkFormatter to apply to the matched text when creating the text to display for a link.
-		 * @param hyperlinkTextFormatter ILinkFormatter to apply to the matched text when creating the hyperlink reference (aka 'href') for a link.
+		 * @param hyperlinkReferenceFormatter IPatternMatchFormatter to apply to the matched text when creating the text to display for a link.
+		 * @param hyperlinkTextFormatter IPatternMatchFormatter to apply to the matched text when creating the hyperlink reference (aka 'href') for a link.
 		 */
-		public function LinkPatternTransform( scheme:String = null, hyperlinkReferenceFormatter:ILinkFormatter = null, hyperlinkTextFormatter:ILinkFormatter = null )
+		public function PatternMatchLinkTransform( scheme:String = null, hyperlinkReferenceFormatter:IPatternMatchFormatter = null, hyperlinkTextFormatter:IPatternMatchFormatter = null )
 		{
 			super();
 			
@@ -79,7 +79,7 @@ package com.codecatalyst.linkify.transform
 		/**
 		 * @inheritDoc
 		 */
-		public function createLink( match:ILinkPatternMatch, prefix:String = "event:" ):String
+		public function createLink( match:IPatternMatch, prefix:String = "event:" ):String
 		{
 			return "<a href=\"" + createHyperlinkReference( match, prefix ) + "\">" + createHyperlinkText( match ) + "</a>";
 		}
@@ -89,14 +89,14 @@ package com.codecatalyst.linkify.transform
 		// ========================================
 
 		/**
-		 * Create the hyperlink reference (aka 'href') given the specified ILinkPatternMatch.
+		 * Create the hyperlink reference (aka 'href') given the specified IPatternMatchFormatter.
 		 * 
-		 * @param match The ILinkPatternMatch containing the matched text.
+		 * @param match The IPatternMatchFormatter containing the matched text.
 		 * @param prefix The extra prefix to prepend to the URL within the href attribute.  Typically 'event:' for use with TextField or Flex Text components.
 		 * 
 		 * @return The resultant hyperlink reference.
 		 */
-		protected function createHyperlinkReference( match:ILinkPatternMatch, prefix:String = "event:" ):String
+		protected function createHyperlinkReference( match:IPatternMatch, prefix:String = "event:" ):String
 		{
 			var href:String = "";
 			
@@ -121,13 +121,13 @@ package com.codecatalyst.linkify.transform
 		}
 		
 		/**
-		 * Create the hyperlink display text given the specified ILinkPatternMatch.
+		 * Create the hyperlink display text given the specified IPatternMatchFormatter.
 		 * 
-		 * @param match The ILinkPatternMatch containing the matched text.
+		 * @param match The IPatternMatchFormatter containing the matched text.
 		 * 
 		 * @return The resultant hyperlink text.
 		 */
-		protected function createHyperlinkText( match:ILinkPatternMatch ):String
+		protected function createHyperlinkText( match:IPatternMatch ):String
 		{
 			var text:String = "";
 			

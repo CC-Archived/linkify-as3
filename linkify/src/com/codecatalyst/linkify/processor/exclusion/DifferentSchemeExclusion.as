@@ -20,25 +20,52 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.exclusion
+package com.codecatalyst.linkify.processor.exclusion
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
-
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+	
 	/**
-	 * ILinkPatternExclusion
+	 * DifferentSchemeExclusion
 	 * 
 	 * @author John Yanarella
 	 */
-	public interface ILinkPatternExclusion
+	public class DifferentSchemeExclusion implements IPatternMatchExclusion
 	{
+		// ========================================
+		// Protected properties
+		// ========================================
+		
 		/**
-		 * Evaluates whether the specified ILinkPatternMatch should excluded from being transformed into a clickable link.
-		 * 
-		 * @param match The ILinkPatternMatch to evaluate.
-		 * @return A Boolean value indicating whether this ILinkPatternMatch should be excluded from transformation.
-		 * 
-		 * @see LinkType
+		 * URI Scheme
+		 */		
+		protected var scheme:String;
+		
+		// ========================================
+		// Constructor
+		// ========================================
+		
+		/**
+		 * Constructor.
 		 */
-		function excludeMatch( match:ILinkPatternMatch ):Boolean;
+		public function DifferentSchemeExclusion( scheme:String )
+		{
+			super();
+			
+			this.scheme = scheme;
+		}
+		
+		// ========================================
+		// Public methods
+		// ========================================
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function excludeMatch( match:IPatternMatch ):Boolean
+		{
+			// Detect existing scheme other than the specified scheme.
+			
+			return ( match.matchedText.match( /^[a-z\-]+:\/?\/?/i ) && match.matchedText.indexOf( scheme ) != 0 );
+		}
 	}
 }

@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2004-2009 David Heinemeier Hansson
+// Copyright (c) 2010 CodeCatalyst, LLC - http://www.codecatalyst.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +19,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
-		
-package com.codecatalyst.linkify.pattern
+
+package com.codecatalyst.linkify.processor.exclusion
 {
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+	
 	/**
-	 * E-mail address matching regex pattern borrowed from RoR's TextHelper implementation.
+	 * RequireSchemeExclusion
 	 * 
-	 * @see http://github.com/rails/rails/blob/master/actionpack/lib/action_view/helpers/text_helper.rb
+	 * @author John Yanarella
 	 */
-	public const MATCH_EMAIL_ADDRESS:RegExp = /([\w\.!#\$%\-+.]+@[a-z0-9\-]+(\.[a-z0-9\-]+)+)/gi;
+	public class RequireSchemeExclusion implements IPatternMatchExclusion
+	{
+		// ========================================
+		// Protected properties
+		// ========================================
+		
+		/**
+		 * URI Scheme
+		 */		
+		protected var scheme:String;
+		
+		// ========================================
+		// Constructor
+		// ========================================		
+		
+		/**
+		 * Constructor.
+		 */
+		public function RequireSchemeExclusion( scheme:String )
+		{
+			super();
+			
+			this.scheme = scheme;
+		}
+
+		// ========================================
+		// Public methods
+		// ========================================		
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function excludeMatch( match:IPatternMatch ):Boolean
+		{
+			// Detect the presence of a different scheme or lack of specified scheme in the matching text.
+			
+			return ( match.matchedText.indexOf( scheme ) != 0 );
+		}
+	}
 }

@@ -20,52 +20,25 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.exclusion
+package com.codecatalyst.linkify.processor
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
-	
 	/**
-	 * RequireSchemeExclusion
+	 * ITextLinkProcessor
 	 * 
 	 * @author John Yanarella
 	 */
-	public class RequireSchemeExclusion implements ILinkPatternExclusion
+	public interface ITextLinkProcessor
 	{
-		// ========================================
-		// Protected properties
-		// ========================================
-		
 		/**
-		 * URI Scheme
-		 */		
-		protected var scheme:String;
-		
-		// ========================================
-		// Constructor
-		// ========================================		
-		
-		/**
-		 * Constructor.
-		 */
-		public function RequireSchemeExclusion( scheme:String )
-		{
-			super();
-			
-			this.scheme = scheme;
-		}
-
-		// ========================================
-		// Public methods
-		// ========================================		
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function excludeMatch( match:ILinkPatternMatch ):Boolean
-		{
-			// Detect the presence of a different scheme or lack of specified scheme in the matching text.
-			
-			return ( match.matchedText.indexOf( scheme ) != 0 );
-		}
+		 * Processes the specified plain text and converts all occurrences of a given link type into clickable links.
+		 * 
+		 * @param text The text to linkify.
+		 * @param prefix The extra prefix to prepend to the URL within the href attribute.  Typically 'event:' for use with TextField or Flex Text components.
+		 * 
+		 * @return The linkified text.
+		 * 
+		 * @see Linkify
+ 		 */
+		function process( text:String, prefix:String = "event:" ):String;
 	}
 }

@@ -20,41 +20,64 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.exclusion
+package com.codecatalyst.linkify.processor.transform.formatter
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+	
+	import flash.errors.IllegalOperationError;
 
 	/**
-	 * InsideTagExclusion
+	 * CapturedGroupFormatter
 	 * 
 	 * @author John Yanarella
 	 */
-	public class InsideTagExclusion implements ILinkPatternExclusion
+	public class CapturedGroupFormatter implements IPatternMatchFormatter
 	{
 		// ========================================
+		// Protected properties
+		// ========================================
+
+		/**
+		 * Format string containing substitution parameters (ex. {0}) based on IPatternMatch captured groups.
+		 */
+		protected var formatString:String;
+		
+		// ========================================
 		// Constructor
-		// ========================================	
+		// ========================================
 		
 		/**
 		 * Constructor.
+		 * 
+		 * @param formatString Format string containing substitution parameters (ex. {0}) based on IPatternMatch captured groups.
 		 */
-		public function InsideTagExclusion()
+		public function CapturedGroupFormatter( formatString:String )
 		{
 			super();
+			
+			this.formatString = formatString;
 		}
 		
 		// ========================================
 		// Public methods
-		// ========================================	
+		// ========================================
 		
 		/**
 		 * @inheritDoc
 		 */
-		public function excludeMatch(match:ILinkPatternMatch):Boolean
+		public function format( match:IPatternMatch ):String
 		{
-			// Detect URLs in the middle of a tag.
-			
-			return ( match.leftText.match( /<[^>]*$/ ) && match.rightText.match( /^[^>]*>/ ) );
+			return formatString.replace( /\{(\d+)\}/g, 
+				function ( ...rest ):String
+				{
+					var parameterIndex:int = parseInt( rest[ 1 ] );
+					
+					if ( parameterIndex < match.capturedGroups.length )
+						return match.capturedGroups[ parameterIndex ] as String;
+					
+					throw new IllegalOperationError( "The specified parameter does not exist in the captured groups for this pattern match." );
+				}
+			);
 		}
 	}
 }

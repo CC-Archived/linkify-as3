@@ -20,10 +20,41 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.pattern
+package com.codecatalyst.linkify.processor.exclusion
 {
+	import com.codecatalyst.linkify.processor.IPatternMatch;
+
 	/**
-	 * Twitter username regex pattern.
+	 * PartOfTagExclusion
+	 * 
+	 * @author John Yanarella
 	 */
-	public const MATCH_TWITTER_MENTION:RegExp = /@([a-z0-9_]+)/gi;
+	public class PartOfTagExclusion implements IPatternMatchExclusion
+	{
+		// ========================================
+		// Constructor
+		// ========================================	
+		
+		/**
+		 * Constructor.
+		 */
+		public function PartOfTagExclusion()
+		{
+			super();
+		}
+		
+		// ========================================
+		// Public methods
+		// ========================================	
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function excludeMatch(match:IPatternMatch):Boolean
+		{
+			// Detect URLs in the middle of a tag.
+			
+			return ( match.leftText.match( /<[^>]*$/ ) && match.rightText.match( /^[^>]*>/ ) );
+		}
+	}
 }

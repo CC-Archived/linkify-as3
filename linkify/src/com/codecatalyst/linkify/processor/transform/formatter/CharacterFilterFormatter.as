@@ -20,16 +20,16 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.formatter
+package com.codecatalyst.linkify.processor.transform.formatter
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
+	import com.codecatalyst.linkify.processor.IPatternMatch;
 
 	/**
 	 * CharacterFilterFormatter
 	 * 
 	 * @author John Yanarella
 	 */
-	public class CharacterFilterFormatter implements ILinkFormatter
+	public class CharacterFilterFormatter implements IPatternMatchFormatter
 	{
 		// ========================================
 		// Protected properties
@@ -81,7 +81,7 @@ package com.codecatalyst.linkify.formatter
 		/**
 		 * @inheritDoc
 		 */
-		public function format( match:ILinkPatternMatch ):String
+		public function format( match:IPatternMatch ):String
 		{
 			return match.matchedText.replace( invalidCharactersPattern, "" );
 		}

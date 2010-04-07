@@ -20,52 +20,10 @@
 // THE SOFTWARE.	
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.codecatalyst.linkify.exclusion
+package com.codecatalyst.linkify.processor.pattern
 {
-	import com.codecatalyst.linkify.core.ILinkPatternMatch;
-	
 	/**
-	 * DifferentSchemeExclusion
-	 * 
-	 * @author John Yanarella
+	 * Phone number matching regular expression pattern.
 	 */
-	public class DifferentSchemeExclusion implements ILinkPatternExclusion
-	{
-		// ========================================
-		// Protected properties
-		// ========================================
-		
-		/**
-		 * URI Scheme
-		 */		
-		protected var scheme:String;
-		
-		// ========================================
-		// Constructor
-		// ========================================
-		
-		/**
-		 * Constructor.
-		 */
-		public function DifferentSchemeExclusion( scheme:String )
-		{
-			super();
-			
-			this.scheme = scheme;
-		}
-		
-		// ========================================
-		// Public methods
-		// ========================================
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function excludeMatch( match:ILinkPatternMatch ):Boolean
-		{
-			// Detect existing scheme other than the specified scheme.
-			
-			return ( match.matchedText.match( /^[a-z\-]+:\/?\/?/i ) && match.matchedText.indexOf( scheme ) != 0 );
-		}
-	}
+	public const PHONE_NUMBER_PATTERN:RegExp = /(\+1\s?)?-?(\d{3}|\(\d{3}\))[\s-]?(\d{3})-(\d{4})/gi;
 }

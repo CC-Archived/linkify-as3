@@ -22,7 +22,7 @@
 
 package com.codecatalyst.linkify
 {
-	import com.codecatalyst.linkify.processor.ILinkTypeProcessor;
+	import com.codecatalyst.linkify.processor.ITextLinkProcessor;
 
 	/**
 	 * Linkify
@@ -35,18 +35,18 @@ package com.codecatalyst.linkify
 		 * Converts all occurrences of the specified link types in the specified text into clickable links.
 		 * 
 		 * @param text The text to linkify.
-		 * @param linkTypeProcessors The ILinkTypeProcessors to use to process the text.
+		 * @param linkTypeProcessors The ITextLinkProcessor(s) to use to process the text.
 		 * @param prefix The extra prefix to prepend to the URL within the href attribute.  Typically 'event:' for use with TextField or Flex Text components.
 		 * 
 		 * @return The linkified text.
 		 * 
 		 * @see LinkTypes
 		 */
-		public static function addLinks( text:String, linkTypeProcessors:Array, prefix:String = "event:" ):String
+		public static function addLinks( text:String, textLinkProcessors:Array, prefix:String = "event:" ):String
 		{
-			for each ( var linkTypeProcessor:ILinkTypeProcessor in linkTypeProcessors )
+			for each ( var textLinkProcessor:ITextLinkProcessor in textLinkProcessors )
 			{
-				text = linkTypeProcessor.process( text, prefix );
+				text = textLinkProcessor.process( text, prefix );
 			}
 			
 			return text;
