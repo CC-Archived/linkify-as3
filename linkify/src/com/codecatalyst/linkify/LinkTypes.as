@@ -85,5 +85,44 @@ package com.codecatalyst.linkify
 					new CapturedGroupFormatter( "http://twitter.com/{0}" )
 				)
 			);
+		
+		/**
+		 * FedEx tracking number.
+		 */
+		public static var FEDEX_TRACKING_NUMBER:ITextLinkProcessor =
+			new RegExpTextLinkProcessor(
+				FEDEX_TRACKING_NUMBER_PATTERN,
+				[ new PartOfTagExclusion(), new AlreadyLinkedExclusion() ],
+				new PatternMatchLinkTransform(
+					null,
+					new CapturedGroupFormatter( "http://www.fedex.com/cgi-bin/tracking?action=track&language=english&cntry_code=us&initial=x&tracknumbers={0}" )
+				)
+			);
+		
+		/**
+		 * UPS tracking number.
+		 */
+		public static var UPS_TRACKING_NUMBER:ITextLinkProcessor =
+			new RegExpTextLinkProcessor(
+				UPS_TRACKING_NUMBER_PATTERN,
+				[ new PartOfTagExclusion(), new AlreadyLinkedExclusion() ],
+				new PatternMatchLinkTransform(
+					null,
+					new CapturedGroupFormatter( "http://wwwapps.ups.com/WebTracking/processRequest?AgreeToTermsAndConditions=yes&loc=en_US&tracknum={0}" )
+				)
+			);
+		
+		/**
+		 * USPS tracking number.
+		 */
+		public static var USPS_TRACKING_NUMBER:ITextLinkProcessor =
+			new RegExpTextLinkProcessor(
+				USPS_TRACKING_NUMBER_PATTERN,
+				[ new PartOfTagExclusion(), new AlreadyLinkedExclusion() ],
+				new PatternMatchLinkTransform(
+					null,
+					new CapturedGroupFormatter( "http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?origTrackNum={0}" )
+				)
+			);
 	}
 }

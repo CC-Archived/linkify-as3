@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2004-2009 David Heinemeier Hansson
+// Copyright (c) 2011 CodeCatalyst, LLC - http://www.codecatalyst.com/
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,7 @@
 package com.codecatalyst.linkify.processor.pattern
 {
 	/**
-	 * E-mail address matching regular expression pattern borrowed from RoR's TextHelper implementation.
-	 * 
-	 * @see http://github.com/rails/rails/blob/master/actionpack/lib/action_view/helpers/text_helper.rb
+	 * USPS tracking number regular expression pattern.
 	 */
-	public const EMAIL_ADDRESS_PATTERN:RegExp = /([\w\.!#\$%\-+.]+@[a-z0-9\-]+(\.[a-z0-9\-]+)+)/gi;
+	public const USPS_TRACKING_NUMBER_PATTERN:RegExp = /\b(E\D{1}\d{9}\D{2}|9\d{15,21})\b/g;
 }

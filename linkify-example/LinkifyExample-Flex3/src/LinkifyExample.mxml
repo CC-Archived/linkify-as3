@@ -14,7 +14,7 @@
 			
 			protected function linkify( text:String ):String
 			{
-				return Linkify.addLinks( text, [ LinkTypes.URL, LinkTypes.EMAIL_ADDRESS, LinkTypes.PHONE_NUMBER, LinkTypes.TWITTER_MENTION ] );
+				return Linkify.addLinks( text, [ LinkTypes.URL, LinkTypes.EMAIL_ADDRESS, LinkTypes.PHONE_NUMBER, LinkTypes.TWITTER_MENTION, LinkTypes.FEDEX_TRACKING_NUMBER, LinkTypes.UPS_TRACKING_NUMBER, LinkTypes.USPS_TRACKING_NUMBER ] );
 			}
 
 		]]>
