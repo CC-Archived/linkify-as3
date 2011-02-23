@@ -1,0 +1,9 @@
+.DS_Store
+
+.settings
+bin
+bin-debug
+html-template
+.sourceMate
+FlexUnitApplication.mxml
+.FlexUnitSettings
