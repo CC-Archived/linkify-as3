@@ -26,12 +26,9 @@
     <classEntry path="com.codecatalyst.linkify.processor.transform.formatter.CapturedGroupFormatter"/>
     <classEntry path="com.codecatalyst.linkify.processor.transform.formatter.CharacterFilterFormatter"/>
     <classEntry path="com.codecatalyst.linkify.processor.transform.formatter.IPatternMatchFormatter"/>
-    <classEntry path="com.codecatalyst.linkify.component.halo.Label"/>
-    <classEntry path="com.codecatalyst.linkify.component.halo.Text"/>
-    <classEntry path="com.codecatalyst.linkify.component.halo.UITextField"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests>
-    <namespaceManifestEntry manifest="linkify-manifest.xml" namespace="http://codecatalyst.com/linkify/2010"/>
+    <namespaceManifestEntry manifest="../src-flex/linkify-manifest.xml" namespace="http://codecatalyst.com/linkify/2010"/>
   </namespaceManifests>
 </flexLibProperties>
